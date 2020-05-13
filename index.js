@@ -9,6 +9,12 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req, res, next) => {
+    setTimeout(next, 1000)
+  })
+}
+
 app.get('/api', (req, res) => {
   res.send('Hello World!')
 })
